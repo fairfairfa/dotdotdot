@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DotDotDot Menu</title>
+
+  <style>
+    /* ================== Reset เบื้องต้น ================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ================== ตัวหนังสือและสีพื้นฐาน ================== */
+    body {
+      font-family: sans-serif;
+      background-color: #fff;
+      color: #222;
+    }
+
+    /* ================== ส่วนหัว (Header) ================== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #1A1A18;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      padding: 20px 60px;
+      color: white;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      position: absolute;
+      top: -35px;
+      left: 168px;
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    header nav ul {
+      display: flex;
+      list-style: none;
+      gap: 70px;
+    }
+
+    header nav ul li {
+      cursor: pointer;
+      color: white;
+      font-family: 'Sukhumvit Set', sans-serif;
+      font-weight: 200;
+      font-size: 25px;
+      position: relative;
+      top: -3px;
+      left: 80px;
+    }
+
+    header nav ul li.active {
+      color: #d2691e; /* สีส้มสำหรับเมนูที่ active */
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .icons img {
+      width: 40px;
+      height: auto;
+      cursor: pointer;
+      position: relative;
+      left: -180px;
+      object-fit: contain;
+    }
+
+    .icons img[alt="EN Icon"] {
+      width: 50px;
+      height: auto;
+    }
+
+    /* ================== ส่วนแบนเนอร์ ================== */
+    .banner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 80px; /* เลื่อนลงมาให้ไม่ชนกับ header */
+    }
+    .banner img.hero {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+.banner-text h1 {
+  font-size: 112px;
+  letter-spacing: 1px;
+  position: relative;
+  top: -200px;
+left: 0%;
+transform: translate(0, -50%);
+ text-align: center;
+ color: #ffffff;
+   font-family: 'JenjrusSaengMon_tri', sans-serif;
+     font-weight: 300; /* ทำให้ตัวบางลง */
+
+     /* ===== เมนู Recommended Menu และตัวเลือก ===== */
+}
+.menu-filter {
+  text-align: center;
+  font-family: 'Sukhumvit Set', sans-serif;
+  position: relative;
+  left: -10px;
+  top: -250px;
+  color: white;
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 186px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.menu-tab {
+  font-size: 30px;
+  font-weight:500;
+  color: white;
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 0px;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+/* เส้นขีดใต้แบบสไลด์ โดยใช้ pseudo-element */
+.menu-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: white;
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+/* เมื่อ active ให้เส้นขีดใต้แสดงเต็มความกว้าง */
+.menu-tab.active::after {
+  width: 100%;
+}
+
+/* (ถ้าต้องการ) สีเปลี่ยนเมื่อ hover */
+.menu-tab:hover {
+  color: #ffd700; /* สีทอง หรือเลือกสีที่ชอบ */
+}
+
+
+
+    /* ================== ฟอนต์ที่ใช้ ================== */
+    @font-face {
+      font-family: 'JenjrusSaengMon_trial';
+      src: url('ฟ้อน/JenjrusSaengMon_trial.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'TsukimiRounded';
+      src: url('fonts/TsukimiRounded.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* ================== สไตล์สำหรับ carousel เมนู ================== */
+
+    .carousel-container {
+      width: 100%;
+      height: 850px;
+      margin: -11rem auto;
+      overflow-x: hidden; /* ป้องกัน scroll bar แนวนอน */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 11px; /* ช่องว่างระหว่างกล่อง */
+      padding: 2rem 1rem;
+      align-items: center;
+      height: 100%;
+      justify-content: center;
+      transition: transform 0.4s ease; /* เลื่อนลื่น */
+      top: -50px;
+      position: relative;
+    }
+
+    .card {
+      background-color: #D2D2D2;
+      width: 329px;
+      height: 432px;
+      padding: 1rem;
+      border-radius: 50px;
+      text-align: center;
+
+      flex: 0 0 auto; /* ไม่ยืดหรือหด */
+      opacity: 0.6;
+      transition: all 0.3s ease;
+      transform: scale(1);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+      margin: 0; /* ไม่มี margin */
+    }
+
+.card:nth-child(1).active {
+  background-image: url('รูป/Rectangle\ 82.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+
+}
+
+.card:nth-child(2).active {
+  background-image: url('รูป/Rectangle\ 81.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+
+}
+
+.card:nth-child(3).active {
+  background-image: url('รูป/Rectangle\ 83.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+
+}
+
+.card:nth-child(4).active {
+  background-image: url('รูป/Rectangle\ 84.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+
+    
+}
+.card:not(.active) {
+  background-color: #D2D2D2;
+}
+
+.card:not(.active) h2 {
+  position: relative;
+  top: 100px;
+  font-size: 45px;
+  color: #7E7E7E;
+}
+
+.card:not(.active) p {
+  position: relative;
+  top: 110px;
+  font-size: 35px;
+  color: #999999;
+  margin-bottom: 1rem;
+  word-spacing: 90px;
+}
+
+/* ขีดเส้นใต้เฉพาะคำใน span (GRANDE, £1.52) */
+.card:not(.active) p:first-of-type span,
+.card:not(.active) p:nth-of-type(2) span {
+  border-bottom: 1px solid #999999;
+  padding-bottom: 2px;
+  display: inline-block;
+  color: #999999;
+}
+
+.card:not(.active) img {
+  position: relative;
+  top: 70px;
+  transition: margin-top 0.3s ease;
+}
+
+.card:not(.active) p span {
+  font-size: 25px;
+  color: #7E7E7E; /* ถ้าต้องการ */
+}
+
+/* ปรับแต่งเพิ่มเติม เช่น สีทับภาพ */
+.card.active {
+  color: white;
+  opacity: 1;
+  width: 428px;
+  height: 525px;
+  border-radius: 50px;
+  z-index: 2;
+  transform: scale(1);
+  align-self: center;
+  margin: 0;
+
+}
+
+    .card img {
+      width: 167.62px;
+      height: 213px;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      margin-top: -300px;
+    }
+
+    .card.active img {
+      width: 229px;
+      height: 291px;
+      margin-top: -180px; /* เลื่อนรูปขึ้น */
+      
+    }
+
+.card, .card * {
+  font-family: 'Bebas Neue', sans-serif;
+         font-weight: 300; /* ทำให้ตัวบางลง */
+}
+
+.card h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card.active h2 {
+  font-size: 45px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+
+.card.active p {
+  font-size: 40px;
+  color: #782500;
+  margin: 10px 0;
+  font-weight: 300;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px; /* เว้นที่ซ้าย-ขวานิดหน่อย */
+}
+
+.card.active p span {
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: 300;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 2px;
+  display: inline-block;
+  position: relative;
+  padding-right: 25px; /* เว้นที่ให้ลูกศร */
+  background-color: transparent;
+  margin-left: 180px; /* เว้นช่องว่างระหว่าง SIZE กับ GRANDE */
+}
+
+/* ลูกศร V ต่อท้ายเฉพาะ GRANDE */
+.card.active p:first-of-type span::after {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 40%;
+  transform: translateY(-50%) rotate(-45deg);
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  pointer-events: none;
+}
+/* ปรับเส้นใต้เฉพาะ span ในบรรทัด PRICE */
+.card.active p:nth-of-type(2) span {
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: 300;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 2px;
+  display: inline-block;
+  width: fit-content;  /* ให้กว้างพอดีกับข้อความ */
+  max-width: 18%;     /* ไม่เกินความกว้างของข้อความ */
+  margin-left: 180px;      /* ไม่ต้องเว้นช่องว่าง */
+  background-color: transparent;
+  left:  -32px;
+}
+
+
+
+
+.card .btn-order {
+  display: none;
+}
+
+.card.active .btn-order {
+  display: flex;
+  width: 328px;
+  height: 49px;
+  border: none;
+  background: white;
+  color: #898989;
+  border-radius: 50px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-family: 'PK Sukhothai', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 20px;
+  top: 40px;
+  position: relative;
+}
+
+
+
+    /* ================== สไตล์ส่วน Suggest (เมนูแนะนำ) ================== */
+
+    .suggest {
+      text-align: center;
+      background: #1A1A1A;
+      color: white;
+      padding: 2rem;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .suggest-title {
+      font-family: 'Tsukimi Rounded', sans-serif;
+      font-weight: bold;
+      font-size: 25px;
+      color: white;
+      margin-bottom: 1rem;
+      position: relative;
+      left: -600px;
+      top: 30px;
+    }
+
+    .suggest-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end; /* ชิดขวา */
+      align-items: center;
+      position: relative;
+      gap: 20px;
+      margin-top: 20px;
+      padding-right: 0;
+      overflow-x: hidden; /* ป้องกัน scroll แนวนอน */
+    }
+
+    .suggest-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      position: relative;
+      width: 1150px; /* กว้างพอให้ .suggest-box */
+      margin-left: 500px; /* ปรับตำแหน่งชิดขวา */
+      height: 243px; /* ความสูงของ suggest */
+      overflow: visible; /* ป้องกันเนื้อหาถูกตัด */
+    }
+
+    .suggest-box {
+  width: 935px;
+  height: 346px;
+  background: rgba(51, 51, 51, 0);
+  border-radius: 20px;
+  overflow: hidden; /* เปลี่ยนจาก visible เป็น hidden */
+  display: flex;
+  padding: 30px 1rem 0 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+  /* ซ่อน scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+    .suggest-box::-webkit-scrollbar {
+      display: none;
+    }
+
+    .suggest-items {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 40px;
+      overflow-x: visible;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      width: 100%;
+      flex-wrap: nowrap;
+
+      /* ซ่อน scrollbar */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .suggest-items::-webkit-scrollbar {
+      display: none;
+    }
+
+.suggest-items div {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* เปลี่ยนจาก center เป็น flex-start */
+  text-align: left; /* ทำให้ข้อความชิดซ้าย */
+}
+
+/* กล่องที่ 1 */
+.suggest-items div:nth-child(1) p {
+  margin-top: 80px;
+  margin-left: 15px;
+}
+.suggest-items div:nth-child(2) p {
+    margin-top: 80px;
+  margin-left: 65px;
+}
+
+.suggest-items div:nth-child(3) p {
+      margin-top: 80px;
+  margin-left: 85px;
+}
+
+.suggest-items div:nth-child(4) p {
+        margin-top: 30px;
+  margin-left: 85px;
+}
+
+.suggest-items div:nth-child(5) p {
+        margin-top: 35px;
+  margin-left: 120px;
+}
+
+.suggest-items div:nth-child(6) p {
+        margin-top: 50px;
+  margin-left: 150px;
+}
+
+.suggest-items div:nth-child(7) p {
+          margin-top: 30px;
+  margin-left: 180px;
+}
+.suggest-items div:nth-child(8) p {
+          margin-top: 30px;
+  margin-left: 210px;
+}
+
+    /* ปรับขนาดและตำแหน่งรูปใน suggest-items แต่ละตัว */
+    .suggest-items div:nth-child(1) img {
+      position: relative;
+      left: -50px;
+      top: 52px;
+      width: 240px;
+    }
+
+    .suggest-items div:nth-child(2) img {
+      position: relative;
+      top: 50px;
+      left: -10px;
+      width: 240px;
+    }
+
+    .suggest-items div:nth-child(3) img {
+      position: relative;
+      top: 50px;
+      left: 10px;
+      width: 240px;
+    }
+
+    .suggest-items div:nth-child(4) img {
+      position: relative;
+      top: 20px;
+      left: 70px;
+      width: 125px;
+    }
+
+    .suggest-items div:nth-child(5) img {
+      position: relative;
+      top: 25px;
+      left: 100px;
+      width: 130px;
+    }
+
+    .suggest-items div:nth-child(6) img {
+      position: relative;
+      top: 30px;
+      left: 130px;
+      width: 120px;
+    }
+    .suggest-items div:nth-child(7) img {
+      position: relative;
+      top: 20px;
+      left: 160px;
+      width: 120px;
+    }
+    .suggest-items div:nth-child(8) img {
+      position: relative;
+      top: 30px;
+      left: 190px;
+      width: 120px;
+    }
+
+    /* ปุ่มลูกศร (arrow) */
+    .arrow {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arrow img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+.arrow.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* ปิดการคลิก */
+}
+
+    /* ================== ส่วนท้าย (Footer) ================== */
+
+    .footer {
+      background-color: #000000;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .footer-column.logo img {
+      position: relative;
+      top: 5px;
+      left: -90px;
+      width: 160px;
+      height: auto;
+      padding-right: 20px;
+      border-right: 1px solid #929292;
+    }
+
+    .footer-column.center-text p {
+      margin: 4px 0;
+      line-height: 1.4;
+      color: #929292;
+      text-align: left;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      font-size: 16px;
+      position: relative;
+      left: -290px;
+      top: 0;
+    }
+
+    .footer-column.contact .footer-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 8px;
+    }
+
+    .footer-column.contact .footer-images img {
+      position: relative;
+      top: 0;
+      left: 180px;
+      width: 40px;
+      height: auto;
+    }
+
+    .footer-column.contact a {
+      text-decoration: none;
+      color: #929292;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      font-size: 16px;
+      text-align: left;
+      position: relative;
+      left: 215px;
+      top: 0;
+      display: inline-block;
+    }
+
+    /* ================== Responsive (มือถือ/จอเล็ก) ================== */
+    @media (max-width: 768px) {
+      /* Header */
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .divider {
+        display: none; /* ซ่อนเส้นคั่น */
+      }
+
+      header nav ul {
+        flex-direction: column;
+        gap: 15px;
+        left: 0 !important;
+      }
+
+      header nav ul li {
+        left: 0;
+        top: 0;
+      }
+
+      .logo img {
+        position: static;
+        height: 50px;
+        left: auto;
+        top: auto;
+      }
+
+      .icons img {
+        position: static;
+        left: auto;
+      }
+
+      /* Footer */
+      .footer-column.logo img,
+      .footer-column.center-text p,
+      .footer-column.contact .footer-images img,
+      .footer-column.contact a {
+        position: static;
+        left: auto;
+        top: auto;
+        text-align: center;
+      }
+
+      .footer-column.center-text p,
+      .footer-column.contact a {
+        text-align: center;
+        font-size: 14px;
+      }
+
+      /* (ถ้ามี) ส่วน Info */
+      .info-section {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        flex-wrap: wrap;
+      }
+
+      .info-box {
+        display: flex;
+        align-items: flex-start;
+        flex: 1 1 100%;
+        padding: 20px;
+        border-right: none;
+      }
+
+      .info-box img {
+        width: 40px;
+        height: auto;
+        margin-right: 15px;
+      }
+
+      .info-text h3 {
+        margin: 0;
+        font-size: 1.1em;
+      }
+
+      .info-text p {
+        margin: 5px 0 0;
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ======= ส่วนหัวของเว็บ ======= -->
+  <header>
+    <div class="logo">
+      <img src="รูป/logo.png" alt="DotDotDot Coffee Logo" />
+    </div>
+
+    <nav>
+      <ul>
+        <li onclick="location.href='cafe.html'">Home</li>
+        <li onclick="location.href='promotion.html'">Promotion</li>
+        <li class="active">Menu</li>
+        <li onclick="location.href='about.html'">About Us</li>
+        <li onclick="location.href='gallery.html'">Gallery</li>
+      </ul>
+    </nav>
+
+    <div class="icons">
+      <img src="รูป/search.png" alt="Search Icon" />
+      <img src="รูป/account.png" alt="User Icon" />
+      <img src="รูป/EN.png" alt="EN Icon" />
+    </div>
+  </header>
+
+  <!-- ======= แบนเนอร์รูปภาพ ======= -->
+<section class="banner">
+  <img
+    id="banner-img"
+    class="hero"
+    src="รูป/แบนเนอร์ เมนู.png"
+    alt="Coffee Banner"
+  />
+  <div class="banner-text">
+    <h1>Menu</h1>
+  </div>
+<div class="menu-filter">
+  <div class="menu-tabs">
+    <div class="menu-tab active">Recommended Menu</div>
+    <div class="menu-tab">Coffee</div>
+    <div class="menu-tab">Tea</div>
+    <div class="menu-tab">Chocolate & Milk</div>
+    <div class="menu-tab">Frappe</div>
+  </div>
+</div>
+</section>
+
+
+  <!-- ======= เนื้อหาเมนู (carousel) ======= -->
+  <main>
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <!-- ไอเทมเมนู 1 -->
+        <div class="card">
+          <img src="รูป/อเมริกาโน่ 4.png" alt="Iced Thai Tea" />
+          <h2>ICED THAI TEA</h2>
+          <p>SIZE <span>GRANDE</span></p>
+          <p>PRICE <span>£1.52</span></p>
+                    <button class="btn-order">See More</button>
+        </div>
+
+        <!-- ไอเทมเมนู 2 (กำลัง active) -->
+        <div class="card active">
+          <img src="รูป/อเมริกาโน่ 1.png" alt="Iced Americano" />
+          <h2>ICED AMERICANO</h2>
+          <p>SIZE <span>GRANDE</span></p>
+          <p>PRICE <span>£1.52</span></p>
+          <button class="btn-order">See More</button>
+        </div>
+
+        <!-- ไอเทมเมนู 3 -->
+        <div class="card">
+          <img src="รูป/อเมริกาโน่ 2.png" alt="Iced Green Tea" />
+          <h2>ICED GREEN TEA</h2>
+          <p>SIZE <span>GRANDE</span></p>
+          <p>PRICE <span>£1.52</span></p>
+                    <button class="btn-order">See More</button>
+        </div>
+
+        <!-- ไอเทมเมนู 4 -->
+        <div class="card">
+          <img src="รูป/อเมริกาโน่ 3.png" alt="Hot Americano" />
+          <h2>HOT AMERICANO</h2>
+          <p>SIZE <span>GRANDE</span></p>
+          <p>PRICE <span>£1.20</span></p>
+                    <button class="btn-order">See More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= ส่วนเมนูแนะนำ (Suggest) ======= -->
+    <section class="suggest">
+      <h3 class="suggest-title">You may also Like</h3>
+
+      <div class="suggest-wrapper">
+        <!-- ปุ่มลูกศรซ้าย -->
+        <button class="arrow left">
+          <img src="รูป/arrow_circle_left.png" alt="Left Arrow" />
+        </button>
+
+        <!-- กล่องรายการเมนูแนะนำ -->
+        <div class="suggest-box">
+          <div class="suggest-items" id="suggest-list">
+            <div>
+              <img src="รูป/คาราเมลร้อน 1.png" alt="Hot Caramel" />
+              <p>HOT CARAMEL COFFEE<br />£1.20</p>
+            </div>
+            <div>
+              <img src="รูป/คาราเมลร้อน 2.png" alt="Hot Americano" />
+              <p>HOT AMERICANO<br />£1.20</p>
+            </div>
+            <div>
+              <img src="รูป/คาราเมลร้อน 3.png" alt="Hot Cappuccino" />
+              <p>HOT CAPPUCCINO<br />£1.20</p>
+            </div>
+            <div>
+              <img src="รูป/มัฉะเย็น 4.png" alt="Iced Cappuccino" />
+              <p>ICED&nbsp;&nbsp;CAPPUCCINO<br />£1.52</p>
+            </div>
+            <div>
+              <img src="รูป/มัฉะเย็น 5.png" alt="Iced Latte" />
+              <p>Green&nbsp;&nbsp;Tea&nbsp;&nbsp;Frappe<br />£1.74</p>
+            </div>
+            <div>
+              <img src="รูป/มัฉะเย็น 1.png" alt="Hot Latte" />
+              <p>Iced&nbsp;&nbsp;green&nbsp;&nbsp;tea<br />£1.52</p>
+            </div>
+            <div>
+              <img src="รูป/มัฉะเย็น 2.png" alt="Mocha" />
+              <p>Iced&nbsp;&nbsp;Americano<br />£1.52</p>
+            </div>
+            <div>
+              <img src="รูป/มัฉะเย็น 3.png" alt="Thai Tea" />
+              <p>Iced&nbsp;&nbsp;Thai&nbsp;&nbsp;tea<br />£1.52</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ปุ่มลูกศรขวา -->
+        <button class="arrow right">
+          <img src="รูป/arrow_circle_left1.png" alt="Right Arrow" />
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======= ส่วนท้ายเว็บ (Footer) ======= -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- โลโก้ -->
+      <div class="footer-column logo">
+        <img src="รูป/logo.png" alt="DotDotDot Logo" />
+      </div>
+
+      <!-- ข้อความกลาง -->
+      <div class="footer-column center-text">
+        <p>
+          Crafted&nbsp;&nbsp;daily&nbsp;&nbsp;•&nbsp;&nbsp;Roasted&nbsp;&nbsp;deeply&nbsp;&nbsp;•&nbsp;&nbsp;Delivered&nbsp;&nbsp;worldwide
+          <br /><br />
+          © 2025 Dot Dot Dot. All rights reserved.
+        </p>
+      </div>
+
+      <!-- รูปภาพโซเชียล + อีเมล -->
+      <div class="footer-column contact">
+        <div class="footer-images">
+          <img src="รูป/instagram.png" alt="Instagram" />
+          <img src="รูป/facebook.png" alt="Facebook" />
+        </div>
+        <p>
+          <a href="mailto:hello@dotdotdot.coffee">hello@dotdotdot.coffee</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================== JavaScript ================== -->
+  <script>
+    // สคริปต์สำหรับ carousel เมนู ให้คลิกที่การ์ดใดก็จะ active และเลื่อนไปตำแหน่งตรงกลาง
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.getElementById('carousel');
+      const cards = document.querySelectorAll('.card');
+
+      // ความกว้างของการ์ด + ช่องว่าง
+      const cardWidth = 329 + 11;
+      const targetIndex = 1; // ตำแหน่งการ์ดที่ต้องการให้อยู่ตรงกลาง (index 1)
+
+      cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+          // เอา active ออกหมดก่อน
+          cards.forEach(c => c.classList.remove('active'));
+
+          // เพิ่ม active ให้การ์ดที่คลิก
+          card.classList.add('active');
+
+          // คำนวณการเลื่อน carousel
+          const scrollToX = (index - targetIndex) * cardWidth;
+
+          // เลื่อน carousel โดยใช้ transform translateX
+          carousel.style.transform = `translateX(${-scrollToX}px)`;
+        });
+      });
+    });
+
+    // ฟังก์ชันเลื่อนเมนูแนะนำ ซ้าย/ขวา
+    function scrollSuggest(direction) {
+      const container = document.getElementById('suggest-list');
+      const scrollAmount = 200;
+      container.scrollLeft += direction * scrollAmount;
+    }
+
+    // ผูกเหตุการณ์ปุ่มลูกศรซ้ายขวา ในเมนูแนะนำ
+    document.querySelector('.arrow.left').onclick = () => {
+      document.getElementById('suggest-list').scrollLeft -= 200;
+    };
+    document.querySelector('.arrow.right').onclick = () => {
+      document.getElementById('suggest-list').scrollLeft += 200;
+    };
+    
+  </script>
+  <script>
+  const suggestList = document.getElementById('suggest-list');
+  const leftArrow = document.querySelector('.arrow.left');
+  const rightArrow = document.querySelector('.arrow.right');
+
+  function updateArrowState() {
+    // ซ้ายสุด
+    if (suggestList.scrollLeft <= 0) {
+      leftArrow.classList.add('disabled');
+    } else {
+      leftArrow.classList.remove('disabled');
+    }
+
+    // ขวาสุด
+    const maxScroll = suggestList.scrollWidth - suggestList.clientWidth;
+    if (suggestList.scrollLeft >= maxScroll) {
+      rightArrow.classList.add('disabled');
+    } else {
+      rightArrow.classList.remove('disabled');
+    }
+  }
+
+  // ตรวจสอบทุกครั้งที่ scroll
+  suggestList.addEventListener('scroll', updateArrowState);
+
+  // ปุ่มเลื่อนซ้าย
+  leftArrow.onclick = () => {
+    suggestList.scrollLeft -= 200;
+    setTimeout(updateArrowState, 200); // รอให้ scroll เสร็จก่อนค่อยอัปเดต
+  };
+
+  // ปุ่มเลื่อนขวา
+  rightArrow.onclick = () => {
+    suggestList.scrollLeft += 200;
+    setTimeout(updateArrowState, 200);
+  };
+
+  // เรียกตอนโหลดหน้าเว็บ
+  window.addEventListener('load', updateArrowState);
+  
+// โค้ดจัดการคลิกให้เปลี่ยน active class
+const tabs = document.querySelectorAll('.menu-tab');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+
+</script>
+
+</body>
+</html>

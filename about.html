@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DotDotDot Coffee</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      background-color: #fff;
+      color: #222;
+      line-height: 1.6;
+        min-height: 100%; /* ยืดความสูงเท่ากับ 2 เท่าของหน้าจอ */
+
+    }
+
+      /* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: #1A1A18;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* เพิ่มเงาด้านล่าง */
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  overflow-x: hidden; /* ป้องกันล้นแนวนอน */
+}
+
+   .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      position: absolute;
+      top: -5;
+      left: 150px;
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+        left: 228px;       
+    }
+
+    header nav ul {
+      display: flex;
+      list-style: none;
+      gap: 70px;
+    }
+
+    header nav ul li {
+      cursor: pointer;
+      color: white;
+      font-family: 'Sukhumvit Set', sans-serif;
+      font-size: 25px;
+               font-weight: 200;
+      position: relative;
+      top: -3px;
+      left: 80px;
+    }
+
+    header nav ul li.active {
+      color: #d2691e;
+    }
+
+       .icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .icons img {
+      width: 40px;
+   height: auto;
+      cursor: pointer;
+      position: relative;
+      left: -180px;
+        object-fit: contain; /* หรือใช้ cover ขึ้นอยู่กับผลลัพธ์ที่ต้องการ */
+
+    }
+    .icons img[alt="EN Icon"] {
+  width: 50px; /* หรือขนาดอื่นที่ต้องการ */
+  height: auto;
+}
+
+        .hero {
+      width: 100%;
+      height: 80vh;
+      object-fit: cover;
+      margin-top: 80px;
+      
+}
+
+
+    @font-face {
+      font-family: 'JenjrusSaengMon_trial';
+      src: url('ฟ้อน/JenjrusSaengMon_trial.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'TsukimiRoundedMedium';
+      src: url('ฟ้อน/TsukimiRounded-Medium.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    h2 {
+      font-family: JenjrusSaengMon_trial;
+    }
+
+    .hero img {
+      width: 100%;
+      height: auto;
+      margin-top: 54px;
+      display: block;
+    }
+
+    .about-us-head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+            position: relative;
+          top: -50px;
+                color: #000000;
+
+
+    }
+
+    .about-us-head h2 span {
+      font-family: 'JenjrusSaengMon_trial';
+      font-size: 72px;
+      color: #000;
+      
+    }
+
+    .about-section {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+                  position: relative;
+          top: -140px;
+          margin-bottom: 150px;
+
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0px;
+      align-items: center;
+      justify-content: center;
+      
+      
+    }
+
+    .about-content.reverse {
+      flex-direction: row-reverse;
+      
+    }
+
+    .about-content img {
+      max-width: 450px;
+      height: auto;
+      flex-shrink: 0;
+            position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: -250px;
+      left: -450px;
+    }
+    .about-reverse img {
+      max-width: 600px;
+      height: auto;
+      flex-shrink: 0;
+            position: absolute;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 1360px;
+      left: 1050px;
+    }
+
+    .about-content .text {
+        font-family: 'TsukimiRoundedMedium';
+      font-size: 20px;
+      color: #000000;
+      line-height: 1.6;
+                  position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: -1765px;
+      left: -1360px;
+    }
+
+    .about-reverse .text {
+      font-family: 'TsukimiRoundedMedium';
+      font-size: 20px;
+      color: #000000;
+      line-height: 1.6;
+             position: absolute;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 50px;
+    }
+
+    .about-title {
+      font-family: 'JenjrusSaengMon_trial';
+      font-size: 112px;
+      color: #000000;
+        font-weight: 300; /* ปรับให้ตัวบางลง */
+       position: absolute;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 375px;
+      left: -120px;
+    }
+/* SECTION ครอบ gallery ทั้งหมด พร้อมพื้นหลัง */
+
+
+.gallery-section {
+  background-image: url('รูป/พื้นหลังus.png');
+  background-size: 100% auto;         /* กว้าง 100%, สูงอัตโนมัติตามสัดส่วน */
+  background-repeat: no-repeat;
+  background-position: top center;
+  width: 100%;
+  aspect-ratio: auto;                 /* ให้ความสูงสัมพันธ์กับรูป */
+  background-color: #ffffff;               /* สีพื้นหลังเผื่อภาพไม่เต็ม */
+
+}
+
+/* พื้นที่ gallery เอง */
+.gallery-free {
+  position: relative;
+  width: px; /* ขึ้นอยู่กับจำนวนรูปและตำแหน่ง */
+  height:70vh;
+}
+
+/* รูปทั้งหมดเป็นอิสระและเด้ง */
+.gallery-free img {
+  position: absolute;
+  transition: transform 0.3s ease;
+}
+
+.gallery-free img:hover {
+  transform: translateY(-50px);
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* ตำแหน่งแต่ละภาพ */
+.img1 {
+  top: 110px;
+  left: 230px;
+  width: 230px;
+}
+
+.img2 {
+  top: 110px;
+  left: 481px;
+  width: 230px;
+}
+
+.img3 {
+  top: 110px;
+  left: 731px;
+  width: 230px;
+}
+
+.img4 {
+  top: 110px;
+  left: 983px;
+  width: 415px;
+}
+
+.img5 {
+  top: 110px;
+  left: 1421px;
+  width: 230px;
+}
+
+    
+
+    /* FOOTER */
+    .footer {
+      background-color: #000000;
+      padding: 40px 20px;
+      font-family: 'Arial', sans-serif;
+      font-size: 14px;
+      color: #ffffff;
+       position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: px
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .footer-column.logo img {
+      position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 5px;             /* ขยับลง */
+      left: -90px;          /* ขยับไปทางซ้าย */
+      width: 160px;
+      height: auto;
+      text-align: center;
+      padding-right: 20px;
+      border-right: 1px solid #929292; /* เส้นขาวแนวตั้ง */
+    }
+
+    .footer-column.center-text p {
+      margin: 4px 0;
+      line-height: 1.4;
+      text-decoration: none;
+      color: #929292;
+      text-align: left;
+      position: relative;
+      top: 0px;
+      left: -250px;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      font-size: 16px;
+    }
+
+    .footer-column.contact .footer-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 8px;
+    }
+
+    .footer-column.contact .footer-images img {
+      position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 0px;             /* ขยับลง */
+      left: 147px;          /* ขยับไปทางขวา */
+      width: 40px;
+      height: auto;
+    }
+
+    .footer-column.contact a {
+      text-decoration: none;
+      color: #929292;
+      text-align: left;
+      position: relative;
+      top: 0px;
+      left: 190px;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+   <header>
+    <div class="logo">
+      <img src="รูป/logo.png" alt="DotDotDot Coffee Logo">
+    </div>
+    <nav>
+      <ul>
+        <li onclick="location.href='cafe.html'">Home</li>
+        <li onclick="location.href='promotion.html'">Promotion</li>
+        <li onclick="location.href='menu.html'">Menu</li>
+        <li class="active">About Us</li>
+        <li onclick="location.href='gallery.html'">Gallery</li>
+      </ul>
+    </nav>
+    <div class="icons">
+      <img src="รูป/search.png" alt="Search Icon">
+      <img src="รูป/account.png" alt="User Icon">
+      <img src="รูป/EN.png" alt="EN Icon">
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="รูป/รูปแบนเนอร์about.png" alt="Coffee Hero">
+  </section>
+
+  <section class="about-us-head">
+<strong style="font-weight: 400;font-family: 'JenjrusSaengMon_tri'; font-size: 112px;">About Us</strong>
+  </section>
+
+  <section class="about-section">
+    <h2 class="about-title">Philosophy</h2>
+
+    <div class="about-content">
+      <img src="รูป/เมล็ดกาแฟ.png" alt="Coffee Beans">
+      <div class="text">
+       <span>
+<div style="position: absolute; top: 1500px; left: 1000px; max-width: 500px;">
+<strong style="font-family: 'TsukimiRoundedMedium'; font-weight: 800;">
+  Dot Dot Dot Coffee
+</strong>
+<br>
+    <span style="font-family: 'TsukimiRoundedMedium'; font-weight: 400;">
+     We&nbsp;believe&nbsp;coffee&nbsp;is&nbsp;more&nbsp;than&nbsp;a&nbsp;drink&nbsp;—&nbsp;it's&nbsp;a&nbsp;moment&nbsp;of&nbsp;clarity&nbsp;in&nbsp;your&nbsp;day.<br>
+At&nbsp;Dot&nbsp;Dot&nbsp;Dot,&nbsp;we&nbsp;craft&nbsp;standout&nbsp;beverages&nbsp;from<span style="white-space: nowrap;">high-quality, freshly roasted beans,</span><br>
+delivering&nbsp;bold,&nbsp;smooth,&nbsp;and&nbsp;uniquely&nbsp;delicious&nbsp;black&nbsp;coffee&nbsp;you&nbsp;won’t&nbsp;find&nbsp;just&nbsp;anywhere.
+    </span>
+      </div>
+    </div>
+      </section>
+
+
+  <section class="about-reverse">
+    <div class="about-reverse">
+      <img src="รูป/แก้วกาแฟ.png" alt="Coffee Cup">
+      <div class="text">
+        <span>
+<div style="position: absolute; top: 1500px; left: 230px; max-width: 500px;">
+<strong style="font-family: 'TsukimiRoundedMedium'; font-weight: 800;">
+  Curated for Authentic Boldness
+</strong>
+<br>
+    <span style="font-family: 'TsukimiRoundedMedium'; font-weight: 400;">
+      Every&nbsp;cup&nbsp;is&nbsp;thoughtfully&nbsp;designed,&nbsp;rare&nbsp;to&nbsp;find,&nbsp;and&nbsp;made&nbsp;for&nbsp;<br>
+      those&nbsp;who&nbsp;truly&nbsp;appreciate&nbsp;real&nbsp;coffee.&nbsp;The&nbsp;three&nbsp;dots…&nbsp;invite&nbsp;you <br>
+      to&nbsp;pause,&nbsp;reflect,&nbsp;and&nbsp;begin&nbsp;again&nbsp;—&nbsp;with&nbsp;coffee&nbsp;that&nbsp;speaks&nbsp;for&nbsp;itself.
+    </span>
+  </span>
+</div>
+
+  </section>
+
+<section class="gallery-section">
+  <div class="gallery-free">
+    <img src="รูป/Rectangle 29.png" class="img1" alt="Image 1" />
+    <img src="รูป/Rectangle 30.png" class="img2" alt="Image 2" />
+    <img src="รูป/Rectangle 31.png" class="img3" alt="Image 3" />
+    <img src="รูป/Rectangle 33.png" class="img4" alt="Image 4" />
+    <img src="รูป/Rectangle 32.png" class="img5" alt="Image 5" />
+  </div>
+</section>
+
+
+
+
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Column 1: Logo -->
+      <div class="footer-column logo">
+        <img src="รูป/logo.png" alt="DotDotDot Logo">
+      </div>
+
+      <!-- Column 2: Center Text -->
+      <div class="footer-column center-text">
+        <p>Crafted&nbsp;&nbsp;daily&nbsp;&nbsp;•&nbsp;&nbsp;Roasted&nbsp;&nbsp;deeply&nbsp;&nbsp;•&nbsp;&nbsp;Delivered&nbsp;&nbsp;worldwide<br><br>
+          © 2025 Dot Dot Dot. All rights reserved.
+        </p>
+      </div>
+
+      <!-- Column 3: Images + Email -->
+      <div class="footer-column contact">
+        <div class="footer-images">
+          <img src="รูป/instagram.png" alt="Instagram">
+          <img src="รูป/facebook.png" alt="Facebook">
+        </div>
+        <p><a href="mailto:hello@dotdotdot.coffee">hello@dotdotdot.coffee</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

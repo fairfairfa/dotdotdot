@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DotDotDot Coffee</title>
+  <style>
+    /* RESET + BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+ html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-image: url('รูป/พื้นหลังpromotion.jpg');
+  background-size: 100% auto;       /* หรือใช้ cover ตามต้องการ */
+  background-position: center top;  /* ให้ภาพชิดบน */
+  background-repeat: no-repeat;     /* ป้องกันภาพซ้ำ */
+  background-attachment: scroll;    /* ให้ scroll ตามเนื้อหา */
+  background-color: transparent;
+  overflow-x: hidden;               /* ป้องกัน scroll แนวนอน */
+  min-height: 80vh;                /* ถ้าอยากบังคับความสูงขั้นต่ำเท่าจอ */
+        padding-bottom: 700px;
+}
+
+
+
+    /* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: #1A1A18;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* เพิ่มเงาด้านล่าง */
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  overflow-x: hidden; /* ป้องกันล้นแนวนอน */
+}
+
+   .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      position: absolute;
+      top: -5;
+      left: 150px;
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+        left: 228px;       
+    }
+
+    header nav ul {
+      display: flex;
+      list-style: none;
+      gap: 70px;
+    }
+
+    header nav ul li {
+      cursor: pointer;
+      color: white;
+      font-family: 'Sukhumvit Set', sans-serif;
+      font-size: 25px;
+         font-weight: 200;
+      position: relative;
+      top: -3px;
+      left: 80px;
+    }
+
+    header nav ul li.active {
+      color: #d2691e;
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .icons img {
+      width: 40px;
+   height: auto;
+      cursor: pointer;
+      position: relative;
+      left: -180px;
+        object-fit: contain; /* หรือใช้ cover ขึ้นอยู่กับผลลัพธ์ที่ต้องการ */
+
+    }
+    .icons img[alt="EN Icon"] {
+  width: 50px; /* หรือขนาดอื่นที่ต้องการ */
+  height: auto;
+}
+
+        .hero {
+      width: 100%;
+      height: 80vh;
+      object-fit: cover;
+      margin-top: 80px;
+      
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.banner img.hero {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+    @font-face {
+      font-family: 'JenjrusSaengMon_trial';
+      src: url('ฟ้อน/JenjrusSaengMon_trial.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'TsukimiRoundedMedium';
+      src: url('ฟ้อน/TsukimiRounded-Medium.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    h2 {
+      font-family: JenjrusSaengMon_trial;
+    }
+
+    .promotion-page {
+      max-width: 12000px;
+      margin: 2rem auto;
+      padding: 0rem;
+      flex: 1;
+      
+    }
+
+    .promotion-page h1 {
+      font-size: 2.5rem;
+      margin-bottom: rem;
+      
+    }
+
+    .sort-by label {
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      position: relative;
+      top: 120px;
+      left: 1310px;
+            color: #000000;
+
+    }
+
+    .sort-by select {
+      color: #000000;
+      border: none;
+      padding: 0.3rem 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      position: relative;
+      top: 120px;
+      left: 1320px;
+    }
+
+/* PROMOTION SECTION (เหมือน GALLERY ที่ให้ไว้) */
+.promotion-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 400px;  /* ปรับความสูงให้พอสำหรับรูปภาพแบบลอย */
+  margin-top: 110px;
+}
+
+.promotion-inner {
+  position: relative;
+  width: 1650px;
+  height: 100%;
+  overflow: visible;
+}
+
+/* รูปภาพใน promotion */
+.promotion-inner img {
+  position: absolute;
+  height: auto;
+  object-fit: cover;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect */
+.promotion-inner img:hover {
+  filter: brightness(70%) grayscale(50%);
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* ตำแหน่งรายตัวของรูปภาพ */
+.promotion-inner img.img-1 {
+  width: 440px;
+  top: 10px;
+  left: 100px;
+}
+
+.promotion-inner img.img-2 {
+  width: 440px;
+  top: 10px;
+  left: 600px;
+}
+
+.promotion-inner img.img-3 {
+  width: 440px;
+  top: 10px;
+  left: 1100px;
+}
+
+.promotion-inner img.img-4 {
+  width: 680px;
+  top: 530px;
+  left: 100px;
+}
+
+.promotion-inner img.img-5 {
+  width: 440px;
+  top: 530px;
+  left: 830px;
+}
+
+    
+
+    /* FOOTER */
+    .footer {
+      background-color: #000000;
+      padding: 40px 20px;
+      font-family: 'Arial', sans-serif;
+      font-size: 14px;
+      color: #ffffff;
+       position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 700px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .footer-column.logo img {
+      position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 5px;             /* ขยับลง */
+      left: -90px;          /* ขยับไปทางซ้าย */
+      width: 160px;
+      height: auto;
+      text-align: center;
+      padding-right: 20px;
+      border-right: 1px solid #929292; /* เส้นขาวแนวตั้ง */
+    }
+
+    .footer-column.center-text p {
+      margin: 4px 0;
+      line-height: 1.4;
+      text-decoration: none;
+      color: #929292;
+      text-align: left;
+      position: relative;
+      top: px;
+      left: -250px;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      font-size: 16px;
+    }
+
+    .footer-column.contact .footer-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 8px;
+    }
+
+    .footer-column.contact .footer-images img {
+      position: relative;   /* หรือ absolute หากต้องการให้ลอยอิสระ */
+      top: 0px;             /* ขยับลง */
+      left: 147px;          /* ขยับไปทางขวา */
+      width: 40px;
+      height: auto;
+    }
+
+    .footer-column.contact a {
+      text-decoration: none;
+      color: #929292;
+      text-align: left;
+      position: relative;
+      top: 0px;
+      left: 190px;
+      font-family: 'TsukimiRoundedMedium', sans-serif;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+  </style>
+</head>
+<body>
+  
+
+   <header>
+    <div class="logo">
+      <img src="รูป/logo.png" alt="DotDotDot Coffee Logo">
+    </div>
+    <nav>
+      <ul>
+        <li onclick="location.href='cafe.html'">Home</li>
+                <li class="active">Promotion</li>
+                        <li onclick="location.href='menu.html'">Menu</li>
+        <li onclick="location.href='about.html'">About Us</li>
+        <li onclick="location.href='gallery.html'">Gallery</li>
+      </ul>
+    </nav>
+    <div class="icons">
+      <img src="รูป/search.png" alt="Search Icon">
+      <img src="รูป/account.png" alt="User Icon">
+      <img src="รูป/EN.png" alt="EN Icon">
+    </div>
+  </header>
+
+
+  <section class="banner">
+  <img id="banner-img" class="hero" src="รูป/แบนเนอร์ โปรโมชั่น.png" alt="Coffee Banner" />
+</section>
+
+  <!-- Promotion Section -->
+  <main class="promotion-page">
+    <div class="sort-by">
+      <label for="sort">Sort by:</label>
+      <select id="sort">
+        <option>Most Recent</option>
+      </select>
+    </div>
+
+    <section class="promotion">
+      <h2 class="our-story-heading" style="justify-content: center;">
+        <span class="brown-text" 
+              style="font-family: 'JenjrusSaengMon_trial'; position: relative; top: 60px; left: 110px; font-weight: 300; font-size: 50px; text-shadow: none; color: #000000;">
+          Promotion
+        </span>
+      </h2>
+
+<section class="promotion-box">
+  <div class="promotion-inner">
+        <a href="#"><img src="รูป/Group 15.png" alt="Buy 1 Get 1" class="img-adjust img-1"></a>
+        <a href="#"><img src="รูป/Group 16.png" alt="Collect Points" class="img-adjust img-2"></a>
+        <a href="#"><img src="รูป/Group 17.png" alt="Blackdot Cold Can" class="img-adjust img-3"></a>
+        <a href="#"><img src="รูป/Group 18.png" alt="Blackdot Kickstart" class="img-adjust img-4"></a>
+        <a href="#"><img src="รูป/Group 19.png" alt="Get 5% Off" class="img-adjust img-5"></a>
+  </div>
+</section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Column 1: Logo -->
+      <div class="footer-column logo">
+        <img src="รูป/logo.png" alt="DotDotDot Logo">
+      </div>
+
+      <!-- Column 2: Center Text -->
+      <div class="footer-column center-text">
+        <p>Crafted&nbsp;&nbsp;daily&nbsp;&nbsp;•&nbsp;&nbsp;Roasted&nbsp;&nbsp;deeply&nbsp;&nbsp;•&nbsp;&nbsp;Delivered&nbsp;&nbsp;worldwide<br><br>
+          © 2025 Dot Dot Dot. All rights reserved.
+        </p>
+      </div>
+
+      <!-- Column 3: Images + Email -->
+      <div class="footer-column contact">
+        <div class="footer-images">
+          <img src="รูป/instagram.png" alt="Instagram">
+          <img src="รูป/facebook.png" alt="Facebook">
+        </div>
+        <p><a href="mailto:hello@dotdotdot.coffee">hello@dotdotdot.coffee</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
